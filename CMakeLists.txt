@@ -3,6 +3,9 @@ project(cpr_example)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# depending on your conan and cmake configuration, you may need to set the used ABI:
+# add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)  # uncomment/add this line if the build fails or you get a runtime error
+
 # Ensure find_package can find cpr later:
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
@@ -17,9 +20,10 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 # Install cpr:
 conan_cmake_run(REQUIRES cpr/1.7.2 # Replace with the latest build from: https://conan.io/center/cpr
-                GENERATORS cmake_find_package)
+                GENERATORS cmake_find_package
+                BUILD missing)
 
 # Find cpr:
 find_package(cpr REQUIRED)
-add_executable(cpr_example main.cpp)
-target_link_libraries(cpr_example PRIVATE cpr::cpr)
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE cpr::cpr)
