@@ -12,16 +12,21 @@ list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
 
 # Download the latest conan CMake integration:
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
-                  "${CMAKE_BINARY_DIR}/conan.cmake")
+  message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+  file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.1/conan.cmake"
+                "${CMAKE_BINARY_DIR}/conan.cmake"
+                TLS_VERIFY ON)
 endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 # Install cpr:
-conan_cmake_run(REQUIRES cpr/1.7.2 # Replace with the latest build from: https://conan.io/center/cpr
-                GENERATORS cmake_find_package
-                BUILD missing)
+conan_cmake_configure(REQUIRES cpr/1.8.1 # Replace with the latest build from: https://conan.io/center/cpr
+                      GENERATORS cmake_find_package)
+conan_cmake_autodetect(settings)
+conan_cmake_install(PATH_OR_REFERENCE .
+                    BUILD missing
+                    REMOTE conancenter
+                    SETTINGS ${settings})
 
 # Find cpr:
 find_package(cpr REQUIRED)
