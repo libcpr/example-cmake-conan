@@ -33,7 +33,7 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 # Install cpr:
-conan_cmake_configure(REQUIRES cpr/1.8.1 # Replace with the latest build from: https://conan.io/center/cpr
+conan_cmake_configure(REQUIRES cpr/1.9.0 # Replace with the latest build from: https://conan.io/center/cpr
                       GENERATORS cmake_find_package)
 conan_cmake_autodetect(settings)
 conan_cmake_install(PATH_OR_REFERENCE .
