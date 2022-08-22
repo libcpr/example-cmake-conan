@@ -9,7 +9,7 @@ A minimal example for using cpr via [Conan](https://conan.io) and its [CMake int
 
 ```bash
 git clone https://github.com/libcpr/example-cmake-conan.git
-cd example-cmake-fetch-content
+cd example-cmake-conan
 mkdir build
 cd build
 cmake ..
