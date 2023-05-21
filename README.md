@@ -3,7 +3,7 @@ A minimal example for using cpr via [Conan](https://conan.io) and its [CMake int
 
 ## Requirements
 
-* [Conan](https://conan.io) can be installed via: `pip3 install conan --user`
+* [Conan](https://conan.io) can be installed via: `pip install --user conan==1.60.0 # conan 2.x.x is not supported right now`
 
 ## Building
 
